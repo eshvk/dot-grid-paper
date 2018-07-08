@@ -11,7 +11,7 @@ Since they are in PDF format, the are useful for:
 
 Several variations are included:
 
-*   _Orientation:_ portrait and landscape
+*   _Orientation:_ portrait (U.S. Letter size of 8.5" X 11") and landscape
 *   _Margin:_ top margin or full grid
 *   _Color:_ white or "antique"
 
