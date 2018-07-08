@@ -7,8 +7,8 @@ styles = [ 'full', 'margin' ]
 for orientation in orientations:
     for color in colors:
         for style in styles:
-            fn = 'tex/dot-grid-%s-%s-%s.tex' % (orientation, color, style)
-            print "Generating %s..." % fn
+            fn = 'tex/dot.grid.%s.%s.%s.tex' % (orientation, color, style)
+            print("Generating %s..." % fn)
             f = open(fn, 'w+')
             f.write("\\documentclass[%s]{article}\n" % orientation)
             f.write("\\usepackage[dot%s]{dot-grid}\n" % style)
