@@ -25,11 +25,16 @@
 %% 'dotfull' option
 \DeclareOption{dotfull}{\@dotmarginfalse}
 
+%% Global Good Notes Essential option
+\newif\if@dotgnessentials\@dotgnessentialsfalse
+\DeclareOption{gnessentialsportrait}{\@dotgnessentialstrue}
+
 \ProcessOptions\relax
 
 % Set fixed margins
 \geometry{right=0in, bottom=0in, left=0.24in, nohead, nofoot}
 
+% Calculate margins and number of dots based on options and orientation
 % Calculate margins and number of dots based on options and orientation
 \if@dotlandscape
   \if@dotmargin
@@ -70,20 +75,93 @@
         \def\@dotnumy{22}
       \fi
     \else
-      \if@dotmargin
-        % portrait with margin
-        \geometry{top=0.74in}
-        \def\@dotnumx{33}
-        \def\@dotnumy{41}
+      \if@dotgnessentials
+        \if@dotmargin
+          % gnessentials with margin
+          \geometry{top=0.74in}
+          % x dots round((5.82 - 0.25)/0.25) = 22
+          % x dots round((7.42 - 0.75)/0.25) = 26
+          \def\@dotnumx{22}
+          \def\@dotnumy{26}
+        \else
+          % gnessentials without margin
+          % x dots round((5.82 - 0.25)/0.25) = 22
+          % x dots round((7.42 - 0.25)/0.25) = 28
+          \geometry{top=0.24in}
+          \def\@dotnumx{22}
+          \def\@dotnumy{28}
+        \fi
       \else
-        % portrait without margin
-        \geometry{top=0.24in}
-        \def\@dotnumx{33}
-        \def\@dotnumy{43}
+        \if@dotmargin
+          % portrait with margin
+          \geometry{top=0.74in}
+          \def\@dotnumx{33}
+          \def\@dotnumy{41}
+        \else
+          % portrait without margin
+          \geometry{top=0.24in}
+          \def\@dotnumx{33}
+          \def\@dotnumy{43}
+        \fi
       \fi
     \fi
   \fi
 \fi
+
+% \if@dotlandscape
+%   \if@dotmargin
+
+%   \else
+
+%   \fi
+% \else
+%   \if@dotdinafour
+%     \if@dotmargin
+%       % A4 with margin
+%       \geometry{top=0.74in}
+%       \def\@dotnumx{32}
+%       \def\@dotnumy{43}
+%     \else
+%       % A4 without margin
+%       \geometry{top=0.24in}
+%       \def\@dotnumx{32}
+%       \def\@dotnumy{46}
+%     \fi
+%   \else
+%     \if@dotdinasix
+%       \if@dotmargin
+%         % A6 with margin
+%         \geometry{top=0.74in}
+%         \def\@dotnumx{15}
+%         \def\@dotnumy{20}
+%       \else
+%         % A6 without margin
+%         \geometry{top=0.24in}
+%         \def\@dotnumx{15}
+%         \def\@dotnumy{22}
+%       \fi
+%     \else
+%       \if@dotmargin
+%         % portrait with margin
+%         \geometry{top=0.74in}
+%         \def\@dotnumx{33}
+%         \def\@dotnumy{41}
+      % \else
+        % portrait without margin
+        % \geometry{top=0.24in}
+        % paperwidth=5.82in,paperheight=7.42in
+        % 28.68
+
+        % \def\@dotnumx{15}
+        % \def\@dotnumy{22}
+        % \geometry{top=0.24in}
+        % \def\@dotnumx{15}
+        % \def\@dotnumx{22}
+%         % \def\@dotnumy{28}
+%       \fi
+%     \fi
+%   \fi
+% \fi
 
 % Avoid initial horizontal space
 \setlength\parindent{0pt}
@@ -98,9 +176,13 @@
 
 % Define dot grid macro
 \newcommand{\dotgrid}{\begin{tikzpicture}[x=0.25in, y=0.25in]
+  % \foreach \x in {1,...,\@dotnumx}{
+  % \fill[dotcolor](\x,0) circle(0.4);
+  % }
     \foreach \x in {1, ..., \@dotnumx}{
       \foreach \y in {1, ..., \@dotnumy}{
         \fill[dotcolor] (\x,\y) circle[radius=0.01in];
+        % \fill[dotcolor] (\x,\y) circle[radius=0.01];
       }
     }
   \end{tikzpicture}}
