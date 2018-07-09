@@ -15,7 +15,6 @@ for papertype in papertypes:
                 f.write(
                     '\\usepackage[paperwidth=5.82in,paperheight=7.42in]{geometry}\n')
             f.write('\\usepackage[dot%s]{dot-grid}\n' % style)
-            f.write('\\usepackage[dot%s]{dot-grid}\n' % style)
             f.write('\\pagecolor{%s}\n' % color)
             f.write('\\begin{document}\n')
             f.write('\\dotgrid\n')
