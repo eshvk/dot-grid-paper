@@ -108,61 +108,6 @@
   \fi
 \fi
 
-% \if@dotlandscape
-%   \if@dotmargin
-
-%   \else
-
-%   \fi
-% \else
-%   \if@dotdinafour
-%     \if@dotmargin
-%       % A4 with margin
-%       \geometry{top=0.74in}
-%       \def\@dotnumx{32}
-%       \def\@dotnumy{43}
-%     \else
-%       % A4 without margin
-%       \geometry{top=0.24in}
-%       \def\@dotnumx{32}
-%       \def\@dotnumy{46}
-%     \fi
-%   \else
-%     \if@dotdinasix
-%       \if@dotmargin
-%         % A6 with margin
-%         \geometry{top=0.74in}
-%         \def\@dotnumx{15}
-%         \def\@dotnumy{20}
-%       \else
-%         % A6 without margin
-%         \geometry{top=0.24in}
-%         \def\@dotnumx{15}
-%         \def\@dotnumy{22}
-%       \fi
-%     \else
-%       \if@dotmargin
-%         % portrait with margin
-%         \geometry{top=0.74in}
-%         \def\@dotnumx{33}
-%         \def\@dotnumy{41}
-      % \else
-        % portrait without margin
-        % \geometry{top=0.24in}
-        % paperwidth=5.82in,paperheight=7.42in
-        % 28.68
-
-        % \def\@dotnumx{15}
-        % \def\@dotnumy{22}
-        % \geometry{top=0.24in}
-        % \def\@dotnumx{15}
-        % \def\@dotnumx{22}
-%         % \def\@dotnumy{28}
-%       \fi
-%     \fi
-%   \fi
-% \fi
-
 % Avoid initial horizontal space
 \setlength\parindent{0pt}
 
@@ -173,16 +118,15 @@
 \definecolor{white}{RGB}{255,255,255}
 \definecolor{antique}{RGB}{255,255,244}
 \definecolor{dotcolor}{RGB}{204,204,198}
-
+% \pgfdeclarelayer{background}
+% \pgfsetlayers{background,main}
 % Define dot grid macro
 \newcommand{\dotgrid}{\begin{tikzpicture}[x=0.25in, y=0.25in]
-  % \foreach \x in {1,...,\@dotnumx}{
-  % \fill[dotcolor](\x,0) circle(0.4);
-  % }
+% \begin{pgfonlayer}{background}
     \foreach \x in {1, ..., \@dotnumx}{
       \foreach \y in {1, ..., \@dotnumy}{
         \fill[dotcolor] (\x,\y) circle[radius=0.01in];
-        % \fill[dotcolor] (\x,\y) circle[radius=0.01];
       }
     }
+    % \end{pgfonlayer}
   \end{tikzpicture}}
